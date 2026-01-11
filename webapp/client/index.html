@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Freenove 4WD Web Controller</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Freenove 4WD Smart Car</h1>
+      <p>Web controller for command, status, and video streaming.</p>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>Connection</h2>
+        <div class="row">
+          <label for="robot-ip">Robot IP</label>
+          <input id="robot-ip" type="text" placeholder="192.168.1.100" />
+          <button id="connect-btn">Connect</button>
+          <button id="disconnect-btn" class="secondary">Disconnect</button>
+        </div>
+        <div class="status">
+          <span id="connection-status">Disconnected</span>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Video</h2>
+        <div class="video-frame">
+          <img id="video-feed" src="" alt="Video stream" />
+          <div class="placeholder" id="video-placeholder">No video yet</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Status</h2>
+        <div class="status-grid">
+          <div>
+            <span class="label">Power</span>
+            <span id="power-status">--</span>
+          </div>
+          <div>
+            <span class="label">Ultrasonic</span>
+            <span id="ultrasonic-status">--</span>
+          </div>
+          <div>
+            <span class="label">Light</span>
+            <span id="light-status">--</span>
+          </div>
+          <div>
+            <span class="label">Last Command</span>
+            <span id="last-command">--</span>
+          </div>
+          <div>
+            <span class="label">Last Status</span>
+            <span id="last-status">--</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Movement</h2>
+        <div class="row">
+          <label for="wheel-type">Wheel Type</label>
+          <select id="wheel-type">
+            <option value="mecanum">Mecanum</option>
+            <option value="ordinary">Ordinary</option>
+          </select>
+          <label for="rotate-mode" class="inline">
+            <input id="rotate-mode" type="checkbox" checked /> Rotate mode
+          </label>
+        </div>
+        <div class="control-grid">
+          <button data-action="forward">Forward</button>
+          <button data-action="backward">Backward</button>
+          <button data-action="left">Turn Left</button>
+          <button data-action="right">Turn Right</button>
+          <button data-action="stop" class="secondary">Stop</button>
+          <button data-action="move-left">Move Left</button>
+          <button data-action="move-right">Move Right</button>
+          <button data-action="diag-left">Diag Left</button>
+          <button data-action="diag-right">Diag Right</button>
+          <button data-action="diag-down-left">Diag Down Left</button>
+          <button data-action="diag-down-right">Diag Down Right</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Servo & Sensors</h2>
+        <div class="row">
+          <label for="servo-left">Servo Left/Right</label>
+          <input id="servo-left" type="range" min="0" max="180" value="90" />
+          <span id="servo-left-value">90</span>
+        </div>
+        <div class="row">
+          <label for="servo-up">Servo Up/Down</label>
+          <input id="servo-up" type="range" min="80" max="180" value="90" />
+          <span id="servo-up-value">90</span>
+        </div>
+        <div class="row">
+          <button id="sonic-toggle">Toggle Ultrasonic</button>
+          <button id="light-toggle">Toggle Light</button>
+          <button id="power-request" class="secondary">Request Power</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>LEDs & Modes</h2>
+        <div class="row">
+          <button data-led-mode="1">LED Mode 1</button>
+          <button data-led-mode="2">LED Mode 2</button>
+          <button data-led-mode="3">LED Mode 3</button>
+          <button data-led-mode="4">LED Mode 4</button>
+          <button data-led-mode="0" class="secondary">LED Off</button>
+        </div>
+        <div class="row">
+          <button data-drive-mode="one">Mode One</button>
+          <button data-drive-mode="two">Mode Two</button>
+          <button data-drive-mode="three">Mode Three</button>
+          <button data-drive-mode="four">Mode Four</button>
+        </div>
+        <div class="row">
+          <button id="buzzer-toggle">Toggle Buzzer</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Raw Command</h2>
+        <div class="row">
+          <input id="raw-command" type="text" placeholder="CMD_LED#1#255#0#0\n" />
+          <button id="send-raw" class="secondary">Send</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Uses FastAPI backend with TCP bridging to the robot.</p>
+    </footer>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
